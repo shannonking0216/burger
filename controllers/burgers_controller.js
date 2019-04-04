@@ -2,35 +2,35 @@ const express = require("express");
 
 const router = express.Router();
 
-// Import the model (cat.js) to use its database functions.
-const cat = require("../models/cat.js");
+// Import the model (burger.js) to use its database functions.
+const burger = require("../models/burger.js");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", (req, res) => {
-  cat.all(data => {
+  burger.selectAll(data => {
     const hbsObject = {
-      cats: data
+      burger: data
     };
     console.log(hbsObject);
     res.render("index", hbsObject);
   });
 });
 
-router.post("/api/cats", (req, res) => {
-  cat.create(["name", "sleepy"], [req.body.name, req.body.sleepy], result => {
-    // Send back the ID of the new quote
+router.post("/api/burger", (req, res) => {
+  burger.insertOne(["burger_name", "devoured"], [req.body.burger_name, req.body.devoured], result => {
+    // Send back the ID of the new burger
     res.json({ id: result.insertId });
   });
 });
 
-router.put("/api/cats/:id", (req, res) => {
+router.put("/api/burger/:id", (req, res) => {
   const condition = "id = " + req.params.id;
 
   console.log("condition", condition);
 
-  cat.update(
+  burger.updateOne(
     {
-      sleepy: req.body.sleepy
+      devoured: req.body.devoured
     },
     condition,
     result => {
@@ -39,20 +39,19 @@ router.put("/api/cats/:id", (req, res) => {
         return res.status(404).end();
       }
       res.status(200).end();
-
     }
   );
 });
 
-// add a delete route to the cats api
-router.delete("/api/cats/:id", (req, res) => {
-  // call the cats model 
-  // to delete a cat by id 
-  // respond back with data
-  cat.delete("id", req.params.id, (data) => {
-    res.json(data);
-  });
-});
+// add a delete route to the burger api
+// router.delete("/api/burger/:id", (req, res) => {
+//   // call the burger model 
+//   // to delete a burger by id 
+//   // respond back with data
+//   burger.delete("id", req.params.id, (data) => {
+//     res.json(data);
+//   });
+// });
 
 // Export routes for server.js to use.
 module.exports = router;
