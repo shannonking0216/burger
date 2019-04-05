@@ -12,23 +12,76 @@ const orm = {
       cb(result);
     });
   },
-  insertOne: function(table, col, vals, cb) {
-    const queryString = "INSERT INTO" + table + "WHERE ?? = ?;";
-    console.log(queryString);
 
-    connection.query(queryString, col, vals, (err, result) => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  insertOne: function(table, cols, vals, cb) {
+    const queryString = "INSERT INTO " + table + " (??, ??) VALUES (?, ?);";
+    console.log("QUERY STRING:", queryString);
+    const mysqlreplacemntArr = cols.concat(vals);
+    console.log(mysqlreplacemntArr);
+    // vals array
+    //[ 'Bacon Cheddar Burger', true ]
+    connection.query(queryString, mysqlreplacemntArr, (err, result) => {
       if (err) {
         throw err;
       }
       cb(result);
     });
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // An example of objColVals would be {name: panther, sleepy: true}
   updateOne: function(table, col, vals, cb) {
     const queryString = "UPDATE" + table + "WHERE ?? = ?;";
     console.log(queryString);
 
-    connection.query(queryString, col, vals, (err, result) => {
+    connection.query(queryString, [col, vals], (err, result) => {
       if (err) {
         throw err;
       }
