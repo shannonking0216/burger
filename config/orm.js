@@ -25,15 +25,15 @@ const orm = {
     });
   },
 // An example of objColVals would be {name: panther, sleepy: true}
-  updateOne: function(table, col, vals, cb) {
-    const queryString = "UPDATE " + table + " (??, ??) VALUES (?, ?);";
-    const mysqlreplacemntArr = cols.concat(vals);
-    connection.query(queryString, mysqlreplacemntArr, (err, result) => {
+  updateOne: function(table, obj, condition, cb) {
+    const queryString = "UPDATE " + table + "SET ? WHERE `" + condition + "`";
+    connection.query(queryString, obj, (err, result) => {
       if (err) {
         throw err;
       }
       cb(result);
     });
+    connection.query(queryString, [''])
   },
 };
 // Export the orm object for the model burger, in burger.js).
