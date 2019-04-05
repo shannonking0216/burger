@@ -22,16 +22,4 @@ const burger = {
 };
 module.exports = burger;
 
-//   // add a delete for the burger
-//   delete: function(col, val, cb) {
-//     // call the orm delete method 
-//     // with the "burger" table
-//     orm.delete("burger", col, val, (data) => {
-//       cb(data);
-//     });
-//   }
-// cat.delete("id", 6, (data) => {
-//   console.log(data);
-// });
-
 // Export the database functions for the controller (burgerController.js).
