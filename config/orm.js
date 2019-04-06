@@ -3,7 +3,7 @@ const connection = require("../config/connection.js");
 
 // Object for all our SQL statement functions.
 const orm = {
-  selectAll: function(table, cb) {
+  selectAll: function (table, cb) {
     const queryString = "SELECT * FROM " + table + ";";
     connection.query(queryString, (err, result) => {
       if (err) {
@@ -12,11 +12,9 @@ const orm = {
       cb(result);
     });
   },
-  insertOne: function(table, cols, vals, cb) {
+  insertOne: function (table, cols, vals, cb) {
     const queryString = "INSERT INTO " + table + " (??, ??) VALUES (?, ?);";
     const mysqlreplacemntArr = cols.concat(vals);
-    // vals array
-    //[ 'Bacon Cheddar Burger', true ]
     connection.query(queryString, mysqlreplacemntArr, (err, result) => {
       if (err) {
         throw err;
@@ -24,8 +22,8 @@ const orm = {
       cb(result);
     });
   },
-// An example of objColVals would be {name: panther, sleepy: true}
-  updateOne: function(table, obj, condition, cb) {
+
+  updateOne: function (table, obj, condition, cb) {
     const queryString = "UPDATE " + table + "SET ? WHERE `" + condition + "`";
     connection.query(queryString, obj, (err, result) => {
       if (err) {
@@ -36,5 +34,5 @@ const orm = {
     connection.query(queryString, [''])
   },
 };
-// Export the orm object for the model burger, in burger.js).
+// Export the orm object for the model burger, in burger.js
 module.exports = orm;

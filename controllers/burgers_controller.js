@@ -42,16 +42,5 @@ router.put("/api/burger/:id", (req, res) => {
     }
   );
 });
-
-// add a delete route to the burger api
-// router.delete("/api/burger/:id", (req, res) => {
-//   // call the burger model 
-//   // to delete a burger by id 
-//   // respond back with data
-//   burger.delete("id", req.params.id, (data) => {
-//     res.json(data);
-//   });
-// });
-
 // Export routes for server.js to use.
 module.exports = router;
